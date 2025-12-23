@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: {{.Values.appName}}
 spec:
+  replicas: {{.Values.appReplicas}}
   selector:
     matchLabels:
       app: {{.Values.appName}}
@@ -11,7 +12,6 @@ spec:
       labels:
         app: {{.Values.appName}}
     spec:
-      replicas: {{.Values.appReplicas}}
       containers:
       - name: {{.Values.appName}}
         image: "{{.Values.appImage}}:{{.Values.appVersion}}"
