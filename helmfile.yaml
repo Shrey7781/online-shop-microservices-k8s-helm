@@ -1,6 +1,6 @@
 releases:
   - name: rediscart
-    chart: charts/rediscart
+    chart: charts/redis
     values:
       - values/redis-values.yaml
       - appReplicas: "1"
