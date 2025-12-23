@@ -14,6 +14,12 @@ The application source code is not included. This repository focuses purely on i
 </p>
 
 ### Architecture Highlights
+- 11 microservices
+- Polyglot stack (Go, Java, Python, Node.js, C#)
+- gRPC-based inter-service communication
+- Redis for cart persistence
+- Kubernetes-native service discovery
+- Managed via Helm and Helmfile
 - Frontend exposed externally via NodePort
 - Backend services communicate internally using ClusterIP services
 - Checkout service orchestrates business flow
@@ -21,6 +27,16 @@ The application source code is not included. This repository focuses purely on i
 - Helm charts reused for stateless services
 - Helmfile manages orchestration
 
+---
+## 📂 Repository Structure
+```
+charts/
+  microservice/
+  redis/
+values/
+k8s-manifests/
+helmfile.yaml
+```
 ---
 
 ## 🔁 Request Flow (User → Services)
@@ -42,11 +58,80 @@ The application source code is not included. This repository focuses purely on i
 
 ---
 
-## 🔗 Original Application Source
-The microservices application is maintained by Google Cloud:
+
+## ⚙️ Tooling Used
+- Kubernetes
+- Helm
+- Helmfile
+- Docker
+- Redis
+
+---
+
+## 🚀 Installation & Setup
+
+### Prerequisites
+- kubectl
+- helm
+- helmfile
+- Kubernetes cluster (Minikube, Kind, GKE, EKS)
+
+---
+
+## 🔧 Install Helm
+```
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+```
+
+---
+
+## 🔧 Install Helmfile
+```
+curl -L https://github.com/helmfile/helmfile/releases/latest/download/helmfile_$(uname -s)_$(uname -m) -o helmfile
+chmod +x helmfile
+sudo mv helmfile /usr/local/bin/
+```
+
+---
+
+## 🏗️ Namespace Setup
+```
+kubectl create namespace microservices
+kubectl config set-context --current --namespace=microservices
+```
+
+---
+
+## 📦 Deploy Using Helmfile
+```
+helmfile sync
+```
+
+Verify:
+```
+kubectl get pods
+```
+
+---
+
+## 🌐 Access Frontend
+```
+kubectl get svc frontend
+```
+
+Use Node IP + NodePort.
+
+---
+
+## 🔗 Original Microservices Source
+Original application maintained by Google Cloud:
 https://github.com/GoogleCloudPlatform/microservices-demo
 
-This repository focuses exclusively on Kubernetes and DevOps deployment practices.
+---
+
+## ⚠️ Disclaimer
+This is a DevOps-focused deployment project for learning and demonstration.
+All application credit goes to Google Cloud Platform.
 
 ---
 
